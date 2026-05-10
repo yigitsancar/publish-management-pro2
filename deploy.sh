@@ -12,4 +12,3 @@ echo "Starting containers with compose..."
 sudo docker-compose -f /home/ubuntu/compose.yml up -d
 
 echo "Deployment completed."
-
