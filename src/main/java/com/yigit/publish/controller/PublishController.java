@@ -37,10 +37,10 @@ public class PublishController {
     }
 
     @PostMapping
-    public String savePublish(@RequestParam Long authorId,
-                              @RequestParam Long bookId,
-                              @RequestParam String publishDate,
-                              @RequestParam Integer edition) {
+    public String savePublish(@RequestParam("authorId") Long authorId,
+                              @RequestParam("bookId") Long bookId,
+                              @RequestParam("publishDate") String publishDate,
+                              @RequestParam("edition") Integer edition) {
 
         Author author = authorRepository.findById(authorId).orElseThrow();
         Book book = bookRepository.findById(bookId).orElseThrow();
