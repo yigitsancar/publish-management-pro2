@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code is already checked out by Jenkins...'
+                echo 'Kod GitHub reposundan alındı.'
             }
         }
 
@@ -19,6 +19,18 @@ pipeline {
             steps {
                 sh 'chmod +x gradlew'
                 sh './gradlew clean build'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                }
             }
         }
 
